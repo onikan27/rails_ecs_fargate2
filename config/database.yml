@@ -4,18 +4,21 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
   password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
-  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
 
 development:
   <<: *default
   database: rails_ecs_fargate2_development
+  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
 
 test:
   <<: *default
   database: rails_ecs_fargate2_test
+  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
 
 production:
   <<: *default
+  host: <%= ENV['DB_HOST'] %>
+  socket: <%= ENV['DB_SOCKET'] %>
   database: rails_ecs_fargate2_production
-  username: rails_ecs_fargate2
-  password: <%= ENV['RAILS_ECS_FARGATE2_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

@@ -6,6 +6,7 @@ RUN apt-get update -qq && \
 
 RUN mkdir /app
 WORKDIR /app
+ENV RAILS_ENV production
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
@@ -13,6 +14,5 @@ RUN gem install bundler
 RUN bundle install
 ADD . /app
 EXPOSE 3000
-# CMD ["bundle", "exec", "rails", "db:create", "&&", "bundle", "exec", "unicorn", "-p", "3000", "-c", "/app/config/unicorn.rb"]
-CMD ["/bin/sh", "-c", "bundle exec rails db:create && bundle exec unicorn -p 3000 -c /app/config/unicorn.rb"]
-# command: /bin/sh -c 'bundle exec rails db:create && bundle exec unicorn -p 3000 -c /app/config/unicorn.rb'
+
+CMD ["/bin/sh", "-c", "bundle exec rails db:create && bundle exec unicorn -p 3000 -c /app/config/unicorn.rb -E production"]

@@ -8,3 +8,4 @@ ENV LANG ja_JP.UTF-8
 ENV LC_TIME C
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+CMD /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf

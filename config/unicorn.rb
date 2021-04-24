@@ -5,7 +5,6 @@ worker_processes 1
 
 working_directory app_path
 
-# developmentとproductionで場合分け
 if ENV['RAILS_ENV'] == 'production'
   listen 3000
 else
