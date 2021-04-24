@@ -1,0 +1,21 @@
+version: '3'
+services: 
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - '80:80'
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: "Asia/Tokyo"
